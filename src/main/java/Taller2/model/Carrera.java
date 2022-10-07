@@ -8,7 +8,7 @@ public class Carrera {
 
     private String nombreCarrera;
     private String codigoCarrera;
-    private int semestresCarrera;
+    private String semestresCarrera;
 
     public List<Estudiante> getEstudiantes(){
         return estudiantes;

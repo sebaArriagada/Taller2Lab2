@@ -3,6 +3,7 @@ package Taller2.gui;
 import Taller2.controller.UniversidadController;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class VentanaRegistroCarrera extends Ventana {
 	private JLabel textoEncabezado, textoNombreCarrera, textoCodigoCarrera, textoCantidadSemestres;
@@ -31,6 +32,20 @@ public class VentanaRegistroCarrera extends Ventana {
 		generarBotonCancelar();
 	}
 
+	private void generarBotonCancelar() {
+		String textoBotonCancelar = "Cancelar";
+		this.botonCancelar = super.generarBoton(textoBotonCancelar, 275, 400, 150, 20);
+		this.add(this.botonCancelar);
+		this.botonCancelar.addActionListener(this);
+	}
+
+	private void generarBotonRegistrarCarrera() {
+		String textoBoton= "Registrar Carrera:";
+		this.botonRegistrarCarrera = super.generarBoton(textoBoton, 75, 400, 150, 20);
+		this.add(this.botonRegistrarCarrera);
+		this.botonRegistrarCarrera.addActionListener(this);
+	}
+
 	private void generarCampoCantidadSemestres() {
 		String textoSemestres = "Cantidad de semestres:";
 		super.generarJLabel(this.textoCantidadSemestres, textoSemestres,20,150,150,20);
@@ -50,6 +65,26 @@ public class VentanaRegistroCarrera extends Ventana {
 		super.generarJLabel(this.textoNombreCarrera, textoNombreCarrera,20,50,150,20);
 		this.campoNombreCarrera= super.generarJTextField(200,50,250,20);
 		this.add(this.campoCodigoCarrera);
+	}
+	private boolean registrarCarrera(){
+		return universidadController.agregarCarrera(this.campoNombreCarrera.getText(),this.campoCodigoCarrera.getText(),this.campoCantidadSemestres.getText());
+	}
+
+	public void actionPerformed(ActionEvent e){
+		if (e.getSource() == this.botonRegistrarCarrera){
+			if (registrarCarrera()){
+				JOptionPane.showMessageDialog(this,"Carrera Registrada Correctamente");
+				VentanaBienvenida ventanaBienvenida = new VentanaBienvenida(universidadController);
+				this.dispose();
+			}
+			else {
+				JOptionPane.showMessageDialog(this,"Carrera ingresada incorrectamente");
+			}
+		}
+		if (e.getSource()==this.botonCancelar){
+			VentanaBienvenida ventanaBienvenida = new VentanaBienvenida(universidadController);
+			this.dispose();
+		}
 	}
 
 }
