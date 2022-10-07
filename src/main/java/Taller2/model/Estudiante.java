@@ -8,6 +8,11 @@ public class Estudiante {
 	private Carrera carrera;
 
 	public Estudiante() {
+		this.nombre= "Sin datos";
+		this.apellido="Sin datos";
+		this.rut="Sin datos";
+		this.numMatricula = 0;
+		this.carrera = null;
 	}
 
 	public Estudiante(String nombre, String apellido, String rut, int numMatricula) {
